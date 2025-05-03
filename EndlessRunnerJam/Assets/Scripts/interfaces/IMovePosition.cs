@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.interfaces
 {
@@ -11,6 +12,6 @@ namespace Assets.Scripts.interfaces
         /// <summary>
         /// Works as the type of input used to control de object - Mouse, Keyboard, AI, etc.
         /// </summary>
-        void SetMovePosition();
+        void SetMovePosition(Vector3 movePosition);
     }
 }
