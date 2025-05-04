@@ -14,5 +14,6 @@ namespace Assets.Scripts.interfaces
         /// Sets the velocity of the object - Rigidbody2D ( physics ), Transform ( direct position ), etc.
         /// </summary>
         void SetVelocity(Vector3 velocityVector);
+        void SetApplyForce(Vector3 force);
     }
 }

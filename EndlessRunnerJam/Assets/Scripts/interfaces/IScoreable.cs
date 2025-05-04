@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.interfaces
 {
-    internal interface IAttack
+    internal interface IScoreable
     {
-        void Attack();
+        void SetScorePoints(float points);
+
     }
 }

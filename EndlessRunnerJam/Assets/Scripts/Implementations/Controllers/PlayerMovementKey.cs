@@ -11,23 +11,31 @@ namespace Assets.Scripts.Implementations
     internal class PlayerMovementKey : MonoBehaviour
     {
 
+        private bool IsJumping;
+
         private void Update()
         {
             float forceX = 1f;
-            float forceY = 0f;
+            float forceY = 0;
+            IMoveVelocity move =  GetComponent<IMoveVelocity>();
+            Vector3 forceVector = new Vector3(forceX, forceY).normalized;
 
             Debug.Log("[PlayerMovementKey] SetMovePosition: Space key pressed, setting forceY to 1");
-            if (Input.GetKeyDown(KeyCode.Space))
+            Debug.Log($"[PlayerMovementKey] IsJumping {IsJumping}");
+            if (Input.GetKeyDown(KeyCode.D))
             {
-                forceY = +1f;
+                forceVector.y = +1f;
+                move.SetApplyForce(forceVector);
                 Debug.Log("[PlayerMovementKey] SetMovePosition: Space key pressed, setting forceY to 1");
             }
+            else 
+            {
+                IsJumping = false;
+            }
 
-            Vector3 moveVector = new Vector3(forceX, forceY).normalized;
-            Debug.Log($"[PlayerMovementKey] SetMovePosition: Generated move vector: {moveVector}");
-
+            Debug.Log($"[PlayerMovementKey] SetMovePosition: Generated move vector: {forceVector}");
+            move.SetVelocity(forceVector);
             Debug.Log($"[PlayerMovementKey] SetMovePosition: Sending velocity");
-            GetComponent<IMoveVelocity>().SetVelocity(moveVector);
         }
     }
 }

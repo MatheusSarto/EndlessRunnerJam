@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.Events;
 
-namespace Assets.Scripts.interfaces
+namespace Assets.Scripts.Events
 {
-    internal interface IAttack
+    internal class ScoreEvent : UnityEvent<ScoreEventData>
     {
-        void Attack();
     }
 }

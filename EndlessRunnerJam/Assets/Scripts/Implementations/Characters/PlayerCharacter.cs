@@ -1,18 +1,17 @@
-﻿using Assets.Scripts.interfaces;
+﻿using Assets.Scripts.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.Scripts.Implementations
 {
-    internal class CharacterBase : MonoBehaviour
+    internal class PlayerCharacter : CharacterBase
     {
-
-        private void Update()
+        public override void TakeDamage(float damage)
         {
+            Life -= damage;
         }
     }
 }

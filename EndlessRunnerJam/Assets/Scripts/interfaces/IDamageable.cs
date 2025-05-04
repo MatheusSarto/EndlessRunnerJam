@@ -5,5 +5,5 @@ public interface IDamageable
     /// <summary>
     /// Takes Damage
     /// </summary>
-    void Damage();
+    void TakeDamage(float damage);
 }

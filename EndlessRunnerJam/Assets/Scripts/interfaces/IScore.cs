@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.interfaces
 {
-    internal interface IAttack
+    internal interface IScore
     {
-        void Attack();
+        double GetTotalScore();
     }
 }
