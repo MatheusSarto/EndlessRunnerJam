@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 6054020279634985930}
   - component: {fileID: 688351096073491459}
   - component: {fileID: 1671334919777145841}
+  - component: {fileID: 920280351707685660}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -266,6 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad5400845710db4fbb88ef52e2a086c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveVelocityRgBd: {fileID: 7642630484340220209}
 --- !u!114 &7642630484340220209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,11 +281,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2: {fileID: -3121424166364087587}
-  MoveSeed: 0
-  ForceMutiplier: 10
-  CharacterBase: {fileID: 1671334919777145841}
+  MoveSeed: 10
+  ForceMutiplier: 15
+  walkBoxCollider: {fileID: 5641036757372567075}
   velocityVector: {x: 0, y: 0, z: 0}
   forceVector: {x: 0, y: 0, z: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!61 &5057980611121696562
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -318,7 +323,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.3722463, y: 0.01252532}
+  m_Offset: {x: 1.45, y: 0.22}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -359,6 +364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471044b2712720d4f9fd318e3ccaa48d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDashAttacks: 2
+  maxUppercuts: 1
+  maxFallAttacks: 1
+  moveVelocityRgBd: {fileID: 7642630484340220209}
 --- !u!114 &1671334919777145841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,3 +381,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Life: 3
+--- !u!114 &920280351707685660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8796530461193929281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b09a29acaec8f0440a4f27ba78fc70f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRb: {fileID: -3121424166364087587}
+  dashForceUpwards: 10
+  dashForceDownwards: -10
+  dashForceForward: 10

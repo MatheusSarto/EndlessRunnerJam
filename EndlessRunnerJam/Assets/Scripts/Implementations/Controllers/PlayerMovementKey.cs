@@ -10,9 +10,12 @@ namespace Assets.Scripts.Implementations
 {
     internal class PlayerMovementKey : MonoBehaviour
     {
+        [SerializeField]  private MoveVelocityRgBd moveVelocityRgBd; // Direct reference for checking CanJump
 
-        private bool IsJumping;
-
+        private void Start()
+        {
+            moveVelocityRgBd = GetComponent<MoveVelocityRgBd>();
+        }
         private void Update()
         {
             float forceX = 1f;
@@ -20,19 +23,13 @@ namespace Assets.Scripts.Implementations
             IMoveVelocity move =  GetComponent<IMoveVelocity>();
             Vector3 forceVector = new Vector3(forceX, forceY).normalized;
 
-            Debug.Log("[PlayerMovementKey] SetMovePosition: Space key pressed, setting forceY to 1");
-            Debug.Log($"[PlayerMovementKey] IsJumping {IsJumping}");
-            if (Input.GetKeyDown(KeyCode.D))
+            // Handle jumping when D key is pressed AND player is grounded
+            if (Input.GetKeyDown(KeyCode.Space) && moveVelocityRgBd != null && moveVelocityRgBd.CanJump)
             {
-                forceVector.y = +1f;
+                forceVector.y = 1f;
                 move.SetApplyForce(forceVector);
-                Debug.Log("[PlayerMovementKey] SetMovePosition: Space key pressed, setting forceY to 1");
+                Debug.Log("Jump initiated!");
             }
-            else 
-            {
-                IsJumping = false;
-            }
-
             Debug.Log($"[PlayerMovementKey] SetMovePosition: Generated move vector: {forceVector}");
             move.SetVelocity(forceVector);
             Debug.Log($"[PlayerMovementKey] SetMovePosition: Sending velocity");

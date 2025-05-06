@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6862371979423559155}
   - component: {fileID: 5697728828733520225}
   - component: {fileID: 3829191203766051601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1492771500365365346}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SegmentFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

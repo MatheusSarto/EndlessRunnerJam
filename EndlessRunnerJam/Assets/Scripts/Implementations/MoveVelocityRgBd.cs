@@ -1,5 +1,6 @@
 using Assets.Scripts.Implementations;
 using Assets.Scripts.interfaces;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveVelocityRgBd : MonoBehaviour, IMoveVelocity
@@ -7,21 +8,77 @@ public class MoveVelocityRgBd : MonoBehaviour, IMoveVelocity
     [SerializeField] private Rigidbody2D rigidbody2;
     [SerializeField] private float MoveSeed;
     [SerializeField] private float ForceMutiplier;
-    [SerializeField] private CharacterBase CharacterBase;
+    [SerializeField] private CircleCollider2D walkBoxCollider;
     [SerializeField] private Vector3 velocityVector;
     [SerializeField] private Vector3 forceVector;
+    [SerializeField] private LayerMask groundLayer;
+    private bool isGrounded; // Renamed for clarity - true when on ground
+    public bool CanJump => isGrounded; // Public property for checking if jump is allowed
 
-  
+
     private void FixedUpdate()
     {
-        rigidbody2.linearVelocity = this.velocityVector;
-        if(Vector3.zero != forceVector)
+        if(rigidbody2.linearVelocityX  < MoveSeed)
+        {
+            rigidbody2.AddForce(velocityVector);
+            if(rigidbody2.linearVelocityX > MoveSeed)
+            {
+                rigidbody2.linearVelocityX = MoveSeed;
+            }
+        }
+        //rigidbody2.linearVelocity = this.velocityVector;
+
+        // Apply force (if any)
+        if (forceVector != Vector3.zero)
         {
             rigidbody2.AddForce(forceVector, ForceMode2D.Impulse);
+            // Clear force after applying once
             forceVector = Vector3.zero;
         }
 
         Debug.Log($"jumping with force: {forceVector}");
+    }
+
+    private void Awake()
+    {
+        // Ensure rigidbody reference is set
+        if (rigidbody2 == null)
+            rigidbody2 = GetComponent<Rigidbody2D>();
+
+        // Initial ground check
+        CheckGrounded();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (((1 << collision.gameObject.layer) & groundLayer) != 0)
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // Check if we're leaving contact with a ground object
+        if (((1 << collision.gameObject.layer) & groundLayer) != 0)
+        {
+            // Only set to false if we're not touching any other ground objects
+            CheckGrounded();
+        }
+    }
+
+    private void CheckGrounded()
+    {
+        // Only run if walkBoxCollider is assigned
+        if (walkBoxCollider == null)
+            return;
+
+        Collider2D[] contacts = new Collider2D[10];
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(groundLayer);
+
+        int contactCount = walkBoxCollider.Overlap(filter, contacts);
+        isGrounded = contactCount > 0;
     }
 
     public void SetVelocity(Vector3 velocityVector)
@@ -45,5 +102,6 @@ public class MoveVelocityRgBd : MonoBehaviour, IMoveVelocity
     public void SetApplyForce(Vector3 force)
     {
         forceVector = new Vector3(force.x, force.y * ForceMutiplier);
+        
     }
 }
