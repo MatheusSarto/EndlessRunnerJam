@@ -26,17 +26,6 @@ public class MoveVelocityRgBd : MonoBehaviour, IMoveVelocity
                 rigidbody2.linearVelocityX = MoveSeed;
             }
         }
-        //rigidbody2.linearVelocity = this.velocityVector;
-
-        // Apply force (if any)
-        if (forceVector != Vector3.zero)
-        {
-            rigidbody2.AddForce(forceVector, ForceMode2D.Impulse);
-            // Clear force after applying once
-            forceVector = Vector3.zero;
-        }
-
-        Debug.Log($"jumping with force: {forceVector}");
     }
 
     private void Awake()
@@ -81,7 +70,7 @@ public class MoveVelocityRgBd : MonoBehaviour, IMoveVelocity
         isGrounded = contactCount > 0;
     }
 
-    public void SetVelocity(Vector3 velocityVector)
+    public void Move(Vector3 velocityVector)
     {
         Debug.Log($"[MoveVelocityRgBd] SetVelocity: Received velocity vector: {velocityVector}");
 
@@ -97,11 +86,5 @@ public class MoveVelocityRgBd : MonoBehaviour, IMoveVelocity
         {
             Debug.LogError("[MoveVelocityRgBd] SetVelocity: rigidbody2 is null, cannot set velocity!");
         }
-    }
-
-    public void SetApplyForce(Vector3 force)
-    {
-        forceVector = new Vector3(force.x, force.y * ForceMutiplier);
-        
     }
 }

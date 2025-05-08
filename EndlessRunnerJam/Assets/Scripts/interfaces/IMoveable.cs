@@ -11,9 +11,8 @@ namespace Assets.Scripts.interfaces
     internal interface IMoveVelocity
     {
         /// <summary>
-        /// Sets the velocity of the object - Rigidbody2D ( physics ), Transform ( direct position ), etc.
+        /// Moves the object setting it's position - Rigidbody2D ( physics - velocity ), Transform ( direct position ), etc.
         /// </summary>
-        void SetVelocity(Vector3 velocityVector);
-        void SetApplyForce(Vector3 force);
+        void Move(Vector3 direction);
     }
 }

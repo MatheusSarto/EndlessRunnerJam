@@ -196,13 +196,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9078986239065667096}
   - component: {fileID: -3121424166364087587}
-  - component: {fileID: -1747346322725865785}
   - component: {fileID: 7642630484340220209}
   - component: {fileID: 5057980611121696562}
   - component: {fileID: 6054020279634985930}
-  - component: {fileID: 688351096073491459}
   - component: {fileID: 1671334919777145841}
-  - component: {fileID: 920280351707685660}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -255,19 +252,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-1747346322725865785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8796530461193929281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ad5400845710db4fbb88ef52e2a086c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveVelocityRgBd: {fileID: 7642630484340220209}
 --- !u!114 &7642630484340220209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,22 +336,6 @@ MonoBehaviour:
   BaseDamage: 0
   DamageMultiplier: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &688351096073491459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8796530461193929281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 471044b2712720d4f9fd318e3ccaa48d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDashAttacks: 2
-  maxUppercuts: 1
-  maxFallAttacks: 1
-  moveVelocityRgBd: {fileID: 7642630484340220209}
 --- !u!114 &1671334919777145841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,19 +349,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Life: 3
---- !u!114 &920280351707685660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8796530461193929281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b09a29acaec8f0440a4f27ba78fc70f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterRb: {fileID: -3121424166364087587}
-  dashForceUpwards: 10
-  dashForceDownwards: -10
-  dashForceForward: 10

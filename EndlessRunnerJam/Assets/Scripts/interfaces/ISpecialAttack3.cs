@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.interfaces
 {
-    internal interface IDashAttack
+    internal interface ISpecialAttack3
     {
-        void DashAttackForward();
-        void DashAttackUpwards();
-        void DashAttackDownwards();
+        void Special3();
     }
 }

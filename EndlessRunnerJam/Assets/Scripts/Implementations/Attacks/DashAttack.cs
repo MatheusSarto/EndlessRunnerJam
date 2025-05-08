@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Implementations.Attacks
 {
-    internal class DashAttack : MonoBehaviour, IDashAttack
+    internal class DashAttack : MonoBehaviour, ISpecialAttack1
     {
 
         [SerializeField] private Rigidbody2D characterRb;
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Implementations.Attacks
             characterRb.AddForce(force, ForceMode2D.Impulse);
         }
 
-        void IDashAttack.DashAttackForward()
+        void ISpecialAttack1.Special1()
         {
             Vector3 force = new Vector3(dashForceForward, 1);
 
