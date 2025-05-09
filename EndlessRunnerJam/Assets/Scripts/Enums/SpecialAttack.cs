@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine;
 
-namespace Assets.Scripts.interfaces
+namespace Assets.Scripts.Enums
 {
-    internal interface ISetVeloctiy
+    internal enum SpecialAttack
     {
-        Vector3 SetVelocity();
+        Special1 = 0,
+        Special2,
+        Special3
     }
 }

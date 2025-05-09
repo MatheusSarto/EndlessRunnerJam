@@ -46,14 +46,16 @@ namespace Assets.Scripts.Attacks
                 {
                     if (overlapColliders[i] != null && overlapColliders[i].TryGetComponent<IDamageable>(out var damageable))
                     {
-                        damageable.TakeDamage(BaseDamage * DamageMultiplier);
+                        if(overlapColliders[i].gameObject != this.gameObject)
+                        {
+                            damageable.TakeDamage(BaseDamage * DamageMultiplier);
+                        }
                     }
                 }
             }
             else
             {
                 Debug.Log($"Colliders: 0");
-
             }
             yield return new WaitForSeconds(Duration);
 

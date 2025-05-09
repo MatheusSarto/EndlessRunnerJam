@@ -3,6 +3,6 @@ namespace Assets.Scripts.interfaces
 { 
     internal interface IJump
     {
-        void Jump(Vector3 direction);
+        void Jump(Vector3 force);
     }
 }

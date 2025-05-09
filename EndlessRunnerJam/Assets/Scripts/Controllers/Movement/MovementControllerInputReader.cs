@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Controllers.Movement
 {
-    internal class MovementControllerInputReader : MonoBehaviour, ISetVeloctiy
+    internal class MovementControllerInputReader : MonoBehaviour, IMovementInputReader
     {
         [SerializeField] private MovementControllerConfig movementControllerConfig;
 
@@ -24,18 +24,15 @@ namespace Assets.Scripts.Controllers.Movement
             }
         }
 
-        public Vector3 SetVelocity()
+        public Vector3 SetDirection()
         {
-            float dirY = 0.0f;
+            float dirY = 0;
             if (Input.GetKeyDown(movementControllerConfig.MoveYpos))
             {
                 Debug.Log("Jump Key Pressed");
-                dirY = 1.0f;
+                dirY = 1f;
             }
-            else
-            {
-                dirY = 0.0f;
-            }
+       
 
             return new Vector3(1, dirY);
         }

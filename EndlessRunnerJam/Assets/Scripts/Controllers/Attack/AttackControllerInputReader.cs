@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine.TextCore.Text;
 using UnityEngine;
 using Assets.Scripts.Configs;
+using Assets.Scripts.Enums;
 
 namespace Assets.Scripts.Controllers.Attack
 {
@@ -31,19 +32,19 @@ namespace Assets.Scripts.Controllers.Attack
         {
             if(Input.GetKeyDown(attackControllerConfig.AttackKey))
             {
-                character.attack.Attack();
+                character.Attack();
             }
             if (Input.GetKeyDown(attackControllerConfig.Special1key))
             {
-                character.specialAttack[0]?.Special();
+                character.SpecialAttack(SpecialAttack.Special1);
             }
             if (Input.GetKeyDown(attackControllerConfig.Special2key))
             {
-                character.specialAttack[1]?.Special();
+                character.SpecialAttack(SpecialAttack.Special2);
             }
             if (Input.GetKeyDown(attackControllerConfig.Special3key))
             {
-                character.specialAttack[2]?.Special();
+                character.SpecialAttack(SpecialAttack.Special3);
             }
 
         }

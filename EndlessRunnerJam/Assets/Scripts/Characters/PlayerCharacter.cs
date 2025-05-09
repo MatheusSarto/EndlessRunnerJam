@@ -9,6 +9,9 @@ namespace Assets.Scripts.Characters
 {
     internal class PlayerCharacter : CharacterBase
     {
+        protected override bool CanJump => isGrounded;
+        protected override bool CanWalk => true;
+
         public override void TakeDamage(float damage)
         {
             Life -= damage;

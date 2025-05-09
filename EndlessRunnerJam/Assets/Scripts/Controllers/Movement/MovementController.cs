@@ -11,9 +11,8 @@ namespace Assets.Scripts.Controllers.Movement
 {
     internal class MovementController : Controllers.CharacterController
     {
-        [SerializeField] protected ISetVeloctiy inputReader;
+        [SerializeField] protected IMovementInputReader inputReader;
         private Vector3 movementDirection;
-        private Vector3 jumpForce;
 
         private void Awake()
         {
@@ -21,22 +20,20 @@ namespace Assets.Scripts.Controllers.Movement
             Debug.Log("Movement Controller Character Reference is Null? " + character == null );
 
 
-            inputReader = GetComponent<ISetVeloctiy>();
+            inputReader = GetComponent<IMovementInputReader>();
             Debug.Log("Movement Controller Input Reader is Null? " + inputReader == null );
         }
         // Read Inputs
         private void Update()
         {
-            movementDirection = inputReader.SetVelocity();
-            jumpForce = inputReader.SetVelocity();
+            movementDirection = inputReader.SetDirection();
         }
 
         // Execute Movement Based on Inputs Read
         private void FixedUpdate()
         {
-            character.moveable.Move(movementDirection);
-            character.jump.Jump(jumpForce);
-
+            character.Move(movementDirection);
+            character.Jump(movementDirection);
         }
     }
 }
