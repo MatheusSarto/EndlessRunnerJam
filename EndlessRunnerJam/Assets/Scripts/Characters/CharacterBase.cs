@@ -1,10 +1,5 @@
 ﻿using Assets.Scripts.Events;
 using Assets.Scripts.interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Characters
@@ -24,6 +19,7 @@ namespace Assets.Scripts.Characters
         private void Awake()
         {
             moveable = GetComponent<IMoveVelocity>();
+            jump = GetComponent<IJump>();
             Debug.Log($"Moveable é null? {moveable == null}");
         }
     }

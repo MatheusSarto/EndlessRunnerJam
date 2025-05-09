@@ -29,7 +29,12 @@ namespace Assets.Scripts.Controllers.Movement
             float dirY = 0.0f;
             if (Input.GetKeyDown(movementControllerConfig.MoveYpos))
             {
+                Debug.Log("Jump Key Pressed");
                 dirY = 1.0f;
+            }
+            else
+            {
+                dirY = 0.0f;
             }
 
             return new Vector3(1, dirY);

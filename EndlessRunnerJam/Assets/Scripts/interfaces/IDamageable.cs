@@ -1,9 +1,11 @@
 using UnityEngine;
-
-public interface IDamageable
+namespace Assets.Scripts.interfaces
 {
-    /// <summary>
-    /// Takes Damage
-    /// </summary>
-    void TakeDamage(float damage);
+    internal interface IDamageable
+    {
+        /// <summary>
+        /// Takes Damage
+        /// </summary>
+        void TakeDamage(float damage);
+    }
 }

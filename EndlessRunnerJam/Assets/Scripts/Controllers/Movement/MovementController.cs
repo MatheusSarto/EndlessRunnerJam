@@ -12,7 +12,8 @@ namespace Assets.Scripts.Controllers.Movement
     internal class MovementController : Controllers.CharacterController
     {
         [SerializeField] protected ISetVeloctiy inputReader;
-        private Vector3 direction;
+        private Vector3 movementDirection;
+        private Vector3 jumpForce;
 
         private void Awake()
         {
@@ -26,13 +27,15 @@ namespace Assets.Scripts.Controllers.Movement
         // Read Inputs
         private void Update()
         {
-            direction = inputReader.SetVelocity();
+            movementDirection = inputReader.SetVelocity();
+            jumpForce = inputReader.SetVelocity();
         }
 
         // Execute Movement Based on Inputs Read
         private void FixedUpdate()
         {
-            character.moveable.Move(direction);
+            character.moveable.Move(movementDirection);
+            character.jump.Jump(jumpForce);
 
         }
     }

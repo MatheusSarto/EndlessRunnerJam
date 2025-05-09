@@ -4,47 +4,46 @@ using Unity.VisualScripting;
 using UnityEngine;
 namespace Assets.Scripts
 {
-    public class MoveVelocityRgBd : MonoBehaviour, IMoveVelocity
+    public class MoveVelocityRgBd : MonoBehaviour, IMoveVelocity, IJump
     {
         [SerializeField] private Rigidbody2D rigidbody2;
-        [SerializeField] private Vector3 maxVelocity;
-        [SerializeField] private float moveSpeed;
-        [SerializeField] private float ForceMutiplier;
         [SerializeField] private CircleCollider2D walkBoxCollider;
-        [SerializeField] private Vector3 currentVelocityVector;
-        [SerializeField] private Vector3 forceVector;
         [SerializeField] private LayerMask groundLayer;
+
+        [SerializeField] private Vector3 currentVelocityVector;
+        [SerializeField] private Vector3 maxVelocity;
+
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private float jumpForce;
         private bool isGrounded; // Renamed for clarity - true when on ground
         public bool CanJump => isGrounded; // Public property for checking if jump is allowed
 
-        public void Move(Vector3 velocityVector)
+        public void Move(Vector3 direction)
         {
-            Debug.Log($"[MoveVelocityRgBd] SetVelocity: Received velocity vector: {velocityVector}");
 
             if (rigidbody2 != null)
             {
-                // Note: This actually fixes a bug - should be using velocity, not linearVelocity
-                Vector2 newVelocity = new(velocityVector.x * moveSpeed, this.currentVelocityVector.y);
+                Vector2 newVelocity = new(direction.x * moveSpeed, rigidbody2.linearVelocityY);
 
-                Debug.Log($"[MoveVelocityRgBd] SetVelocity: Setting rigidbody2 velocity to {newVelocity} (raw vector * moveSeed {moveSpeed})");
                 this.currentVelocityVector = newVelocity;
             }
-            else
+     
+        }
+
+        public void Jump(Vector3 direction)
+        {
+            Debug.Log($"Pode Pular? {CanJump}");
+            if(CanJump)
             {
-                Debug.LogError("[MoveVelocityRgBd] SetVelocity: rigidbody2 is null, cannot set velocity!");
+                Debug.Log($"Pulando! Força = {new Vector2(0, jumpForce * direction.y)}");
+                rigidbody2.AddForce(new Vector2(0, jumpForce * direction.y), ForceMode2D.Impulse);
             }
+            Debug.Log($"Pode Pular? {CanJump}");
         }
 
         private void FixedUpdate()
         {
-            if(rigidbody2.linearVelocityX  < maxVelocity.x)
-            {
-                rigidbody2.AddForce(currentVelocityVector);
-                if(rigidbody2.linearVelocityX > maxVelocity.x)
-                {
-                    rigidbody2.linearVelocityX = maxVelocity.x;
-                }
-            }
+            rigidbody2.linearVelocity = currentVelocityVector;   
         }
 
         private void Awake()

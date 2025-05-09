@@ -1,6 +1,8 @@
 using UnityEngine;
-
-public interface IJUmp
-{
-    void Jump();
+namespace Assets.Scripts.interfaces
+{ 
+    internal interface IJump
+    {
+        void Jump(Vector3 direction);
+    }
 }
