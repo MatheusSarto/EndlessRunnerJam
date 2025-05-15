@@ -9,15 +9,23 @@ using UnityEngine;
 
 namespace Assets.Scripts.Attacks
 {
-    internal class UpperCut :  ISpecialAttack
+    internal class UpperCut : MonoBehaviour, ISpecialAttack
     {
-        [SerializeField] private Vector3 dashDistance;
-        [SerializeField] private float attackSpeed;
-        [SerializeField] private IMoveVelocity moveable;
+        [SerializeField] private Vector2 direction;
+        [SerializeField] private float attackVelocity;
+        [SerializeField] private IDash dash;
 
+        [SerializeField] public float Duration => duration;
+        [SerializeField] private float duration = 0.7f;
         public void Special()
         {
-            moveable.Move(new Vector3(dashDistance.x, dashDistance.y * attackSpeed));
+            dash.Dash(direction, attackVelocity, Duration);
+            Debug.Log($"IDash component found: {dash != null}");
+        }
+
+        private void Start()
+        {
+            dash = GetComponent<IDash>();
         }
     }
 }

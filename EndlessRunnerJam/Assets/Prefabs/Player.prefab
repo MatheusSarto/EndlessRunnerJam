@@ -328,6 +328,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Life: 3
+  walkBoxCollider: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  currentVelocityVector: {x: 0, y: 0, z: 0}
+  maxVelocity: {x: 0, y: 0, z: 0}
+  moveSpeed: 10
+  jumpForce: 20
 --- !u!114 &8526122451860081991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,13 +348,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7670354e31b1a4693979eff51671ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody2: {fileID: -3121424166364087587}
-  maxVelocity: {x: 40, y: 0, z: 0}
-  moveSpeed: 25
-  ForceMutiplier: 1.2
-  walkBoxCollider: {fileID: 5641036757372567075}
-  velocityVector: {x: 0, y: 0, z: 0}
-  forceVector: {x: 2, y: 5, z: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  character: {fileID: 1671334919777145841}
+  currentVelocityVector: {x: 0, y: 0, z: 0}

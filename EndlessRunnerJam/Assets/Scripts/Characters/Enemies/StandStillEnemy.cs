@@ -7,6 +7,10 @@ namespace Assets.Scripts.Characters.Enemies
 {
     internal class StandStillEnemy : EnemyBase
     {
+        protected override bool CanJump => throw new NotImplementedException();
+
+        protected override bool CanWalk => throw new NotImplementedException();
+
         private void Awake()
         {
             ScoreMultiplier = 1.5f;

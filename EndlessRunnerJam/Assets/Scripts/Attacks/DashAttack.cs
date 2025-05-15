@@ -3,16 +3,23 @@ using UnityEngine;
 
 namespace Assets.Scripts.Attacks
 {
-    internal class DashAttack : ISpecialAttack
+    internal class DashAttack : MonoBehaviour, ISpecialAttack
     {
-        [SerializeField] private Vector3 dashDistance;
-        [SerializeField] private IMoveVelocity moveable;
-        [SerializeField] private float attackSpeed;
+        [SerializeField] private Vector2 direction;
+        [SerializeField] private IDash dash;
+        [SerializeField] private float attackVelocity;
+        [SerializeField]  public float Duration => duration;
+        [SerializeField]  private float duration = 0.7f;
 
+        private void Start()
+        {
+            dash = GetComponent<IDash>();
+            Debug.Log($"IDash component found: {dash != null}");
+        }
         public void Special()
         {
-            
-            moveable.Move(new Vector3(dashDistance.x * attackSpeed, dashDistance.y));
+            dash.Dash(direction, attackVelocity, Duration);
         }
+
     }
 }

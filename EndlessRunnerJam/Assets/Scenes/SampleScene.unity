@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!58 &166747519 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5641036757372567075, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
+  m_PrefabInstance: {fileID: 361198353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &361198353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,12 +136,48 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: -3121424166364087587, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
+      propertyPath: m_GravityScale
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671334919777145841, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
+      propertyPath: jumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671334919777145841, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671334919777145841, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
+      propertyPath: walkBoxCollider
+      value: 
+      objectReference: {fileID: 166747519}
+    - target: {fileID: 1671334919777145841, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7642630484340220209, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
       propertyPath: MoveSeed
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7642630484340220209, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
       propertyPath: ForceMutiplier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526122451860081991, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 1133299328}
+    - target: {fileID: 8526122451860081991, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
+      propertyPath: jumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526122451860081991, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526122451860081991, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
+      propertyPath: maxVelocity.x
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8796530461193929281, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
@@ -183,7 +224,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7642630484340220209, guid: 500642dde2ca26a4fa93bb2dcb36d568, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -335,16 +377,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b5f69e6abec2c84981bff26f89a0cd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 73aa02ec94131ff49bfd2ecab7ec84f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectToFollow: {fileID: 1133299327}
   followerObject: {fileID: 519420032}
-  offset: {x: 16, y: 5, z: 0}
-  finalPosition: {fileID: 1133299327}
+  offset: {x: 0, y: 0, z: 0}
+  finalPosition: {fileID: 0}
   startAnimantionOffset: {x: 0, y: 0, z: 0}
   isOnAnimation: 0
-  animationVelocity: {x: 1.5, y: 2}
+  animationVelocity: {x: 0, y: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,6 +1095,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Life: 0
+  walkBoxCollider: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  currentVelocityVector: {x: 0, y: 0, z: 0}
+  maxVelocity: {x: 0, y: 0, z: 0}
+  moveSpeed: 0
+  jumpForce: 0
   ScoreMultiplier: 0
   StylePoints: 0
   EnemyPoints: 0
@@ -1067,7 +1117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1870064233}
-  - component: {fileID: 1870064232}
+  - component: {fileID: 1870064234}
   m_Layer: 0
   m_Name: LevelsLoader
   m_TagString: Untagged
@@ -1075,23 +1125,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1870064232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870064231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33701a4f7bee1754cad489b6a761b330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerTransform: {fileID: 1133299327}
-  SegmentPrefabs:
-  - {fileID: 5468073689344195558, guid: a8f5bef70da8e464991e89bfa01ded00, type: 3}
-  - {fileID: 2061434918809226103, guid: 6abf43da19854ec4a8b3b67a11e1391f, type: 3}
-  InitialSegments: 5
 --- !u!4 &1870064233
 Transform:
   m_ObjectHideFlags: 0
@@ -1107,6 +1140,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1870064234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870064231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87304e979ddb1ae41982e2e4890e8e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTransform: {fileID: 1133299327}
+  SegmentPrefabs:
+  - {fileID: 5468073689344195558, guid: a8f5bef70da8e464991e89bfa01ded00, type: 3}
+  - {fileID: 2061434918809226103, guid: 6abf43da19854ec4a8b3b67a11e1391f, type: 3}
+  InitialSegments: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -7,15 +7,12 @@ namespace Assets.Scripts
 {
     public class MoveVelocityRgBd : MonoBehaviour, IMoveVelocity, IJump
     {
-        [SerializeField] private CharacterBase character;
-
-        [SerializeField] private Vector3 currentVelocityVector;
-        [SerializeField] private Vector3 maxVelocity;
-
         [SerializeField] private float moveSpeed;
         [SerializeField] private float jumpForce;
+        [SerializeField] private Vector3 velocity;
 
-        private Rigidbody2D rigidbody2;
+
+        [SerializeField]  private Rigidbody2D rigidbody2;
 
 
         public void Move(Vector3 direction)
@@ -23,9 +20,19 @@ namespace Assets.Scripts
 
             if (rigidbody2 != null)
             {
-                Vector2 newVelocity = new(direction.x * moveSpeed, rigidbody2.linearVelocityY);
+                Debug.Log($"Direção de movimento ={direction.ToString()}");
+                Vector2 newVelocity = new(direction.x * moveSpeed, rigidbody2.linearVelocity.y);
+                Debug.Log($"Nova Velocidade ={newVelocity.ToString()}");
 
-                this.currentVelocityVector = newVelocity;
+                this.velocity = newVelocity;
+
+                Debug.Log($"Esta mais devagar que o minimo? {rigidbody2.linearVelocity.x < moveSpeed}");
+                Debug.Log($"CurrentVelocity.x ={rigidbody2.linearVelocity.x}");
+                if (rigidbody2.linearVelocity.x != moveSpeed)
+                {
+                    Debug.Log($"MoveVelocityRgBd - changing character velocity");
+                    rigidbody2.linearVelocity = velocity;
+                }
             }
      
         }
@@ -36,17 +43,25 @@ namespace Assets.Scripts
             rigidbody2.AddForce(new Vector2(0, jumpForce * direction.y), ForceMode2D.Impulse);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            rigidbody2.linearVelocity = currentVelocityVector;   
+
         }
 
-        private void Awake()
+        private void Start()
         {
+            CharacterBase character = GetComponent<CharacterBase>();
             // Ensure rigidbody reference is set
             if (rigidbody2 == null)
-                rigidbody2 = character.GetComponent<Rigidbody2D>();
+                rigidbody2 = GetComponent<Rigidbody2D>();
+                // In Start() or Awake() of your player controller
+                rigidbody2.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
+
+            moveSpeed = character.MoveSpeed;
+            jumpForce = character.JumpForce;
+            Debug.Log($"Character MoveSpeed: {moveSpeed}");
+            Debug.Log($"Character jumpForce: {jumpForce}");
         }
     }
 }

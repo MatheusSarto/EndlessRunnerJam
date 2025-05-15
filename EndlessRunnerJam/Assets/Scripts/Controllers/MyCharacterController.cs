@@ -11,7 +11,7 @@ using UnityEngine.TextCore.Text;
 
 namespace Assets.Scripts.Controllers
 {
-    internal class CharacterController : MonoBehaviour
+    internal class MyCharacterController : MonoBehaviour
     {
         [SerializeField] protected CharacterBase character;
     }

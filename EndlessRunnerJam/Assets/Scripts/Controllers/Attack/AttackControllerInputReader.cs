@@ -10,7 +10,7 @@ using Assets.Scripts.Enums;
 
 namespace Assets.Scripts.Controllers.Attack
 {
-    internal class AttackControllerInputReader : CharacterController
+    internal class AttackControllerInputReader : MyCharacterController
     {
         [SerializeField] private AttackControllerConfig attackControllerConfig;
 
@@ -32,18 +32,22 @@ namespace Assets.Scripts.Controllers.Attack
         {
             if(Input.GetKeyDown(attackControllerConfig.AttackKey))
             {
+                Debug.Log("Normal Attack Pressed");
                 character.Attack();
             }
             if (Input.GetKeyDown(attackControllerConfig.Special1key))
             {
+                Debug.Log("Special Attack 1 Pressed");
                 character.SpecialAttack(SpecialAttack.Special1);
             }
             if (Input.GetKeyDown(attackControllerConfig.Special2key))
             {
+                Debug.Log("Special Attack 2 Pressed");
                 character.SpecialAttack(SpecialAttack.Special2);
             }
             if (Input.GetKeyDown(attackControllerConfig.Special3key))
             {
+                Debug.Log("Special Attack 3 Pressed");
                 character.SpecialAttack(SpecialAttack.Special3);
             }
 

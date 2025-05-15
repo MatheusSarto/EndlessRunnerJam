@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Controllers.Movement
 {
-    internal class MovementController : Controllers.CharacterController
+    internal class MovementController : Controllers.MyCharacterController
     {
         [SerializeField] protected IMovementInputReader inputReader;
         private Vector3 movementDirection;
@@ -27,6 +27,8 @@ namespace Assets.Scripts.Controllers.Movement
         private void Update()
         {
             movementDirection = inputReader.SetDirection();
+            Debug.Log("Movement Controller - InputReader Directions: " + movementDirection);
+
         }
 
         // Execute Movement Based on Inputs Read
