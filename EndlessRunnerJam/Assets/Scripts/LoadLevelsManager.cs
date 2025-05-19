@@ -33,7 +33,6 @@ namespace Assets.Scripts
         {
             Destroy(activeSegments[0]);
             activeSegments.RemoveAt(0);
-
             SpawnSegment();
         }
     }

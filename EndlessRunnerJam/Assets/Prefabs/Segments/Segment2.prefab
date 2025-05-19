@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3130050273948435349}
   - component: {fileID: 7431935996726749412}
   - component: {fileID: 6847440153181702407}
+  - component: {fileID: 5902662318697364028}
   m_Layer: 6
   m_Name: Segment2
   m_TagString: Untagged
@@ -134,3 +135,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5902662318697364028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061434918809226103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5cfbf52d723964f9c7edf505a9ffc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 700990027085785256, guid: d086400b4bade83428a5efcea0afbe15, type: 3}
+  topRight: {x: 10, y: 1}
+  bottomLeft: {x: -10, y: 1}
+  enemyCount: 10

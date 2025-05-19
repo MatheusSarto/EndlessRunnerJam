@@ -27,6 +27,7 @@ namespace Assets.Scripts.Attacks
 
         private IEnumerator PerformAttack()
         {
+            Debug.Log("Attacking");
             _IsAttacking = true;
 
             HurtBox.enabled = true;
@@ -44,12 +45,14 @@ namespace Assets.Scripts.Attacks
                 Debug.Log($"Damageable Colliders: {string.Join(", ",overlapColliders.Where(c => c != null && c.GetComponent<IDamageable>() != null).Select(x => x.name))}");
                 for (int i = 0; i < collidersCount; i++)
                 {
-                    if (overlapColliders[i] != null && overlapColliders[i].TryGetComponent<IDamageable>(out var damageable))
+                    if (overlapColliders[i] != null) {
+                        Debug.Log($"colliders name: {overlapColliders[i].name}");
+                    }
+                    var damageable = overlapColliders[i].gameObject.transform.root.gameObject.GetComponentInChildren<IDamageable>();
+                    if (overlapColliders[i] != null && damageable != null && overlapColliders[i].gameObject.transform.root.gameObject != this.gameObject)
                     {
-                        if(overlapColliders[i].gameObject != this.gameObject)
-                        {
-                            damageable.TakeDamage(BaseDamage * DamageMultiplier);
-                        }
+                        Debug.Log($"Calling Damage");
+                        damageable.TakeDamage(BaseDamage * DamageMultiplier);   
                     }
                 }
             }

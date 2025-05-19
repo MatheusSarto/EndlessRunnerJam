@@ -24,36 +24,23 @@ namespace Assets.Scripts.Characters
 
         protected ISpecialAttack[] specialAttacks = new ISpecialAttack[3];
 
-
-        [SerializeField] protected Collider2D walkBoxCollider;
-        [SerializeField] protected LayerMask groundLayer;
-
-
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected float jumpForce;
 
         protected bool isGrounded;
         protected bool isAttacking;
-        protected bool isSpecialAttacking;
+        public bool isSpecialAttacking;
         protected abstract bool CanJump { get; }
         protected abstract bool CanWalk { get; }
         protected bool canWalk;
 
         public abstract void TakeDamage(float damage);
 
-        private void Update()
-        {
-            CheckGrounded();
-        }
-
-        private void Awake()
+        protected virtual void Awake()
         {
             moveable = GetComponent<IMoveVelocity>();
             jump = GetComponent<IJump>();
             Debug.Log($"Moveable é null? {moveable == null}");
-
-            // Initial ground check
-            CheckGrounded();
 
             specialAttacks = GetComponents<ISpecialAttack>().Take(3).ToArray();
             attack = GetComponent<IAttack>();
@@ -90,16 +77,10 @@ namespace Assets.Scripts.Characters
                 isSpecialAttacking = true;
                 Debug.Log($"Special Attack {(int)special} is null: {specialAttacks[(int)special] == null}");
                 specialAttacks[(int)special]?.Special();
-
-                StartCoroutine(StopSpecialAttack(specialAttacks[(int)special].Duration));
             }
         }
 
-        private IEnumerator StopSpecialAttack(float duration)
-        {
-            yield return new WaitForSeconds(duration);
-            isSpecialAttacking = false;
-        }
+
 
         //private void OnCollisionEnter2D(Collision2D collision)
         //{
@@ -119,18 +100,6 @@ namespace Assets.Scripts.Characters
         //    }
         //}
 
-        protected void CheckGrounded()
-        {
-            // Only run if walkBoxCollider is assigned
-            if (walkBoxCollider == null)
-                return;
 
-            Collider2D[] contacts = new Collider2D[10];
-            ContactFilter2D filter = new ContactFilter2D();
-            filter.SetLayerMask(groundLayer);
-
-            int contactCount = walkBoxCollider.Overlap(filter, contacts);
-            isGrounded = contactCount > 0;
-        }
     }
 }

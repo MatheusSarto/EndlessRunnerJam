@@ -8,7 +8,6 @@ namespace Assets.Scripts.interfaces
 {
     internal interface ISpecialAttack
     {
-        float Duration { get; }
         void Special();
 
     }

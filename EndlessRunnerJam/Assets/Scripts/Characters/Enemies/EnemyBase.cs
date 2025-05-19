@@ -22,7 +22,11 @@ namespace Assets.Scripts.Characters.Enemies
             {
                 Debug.Log($"Throwing ScoreEvent");
                 new ScoreEvent().Invoke(EnemyPointsReward());
+
+                Destroy(this.transform.root.gameObject);
             }
+            Debug.Log($"Took {damage} damage; Current Health: {Life}");
+            
         }
 
         protected abstract ScoreEventData EnemyPointsReward();

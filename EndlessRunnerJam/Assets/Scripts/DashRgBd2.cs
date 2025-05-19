@@ -13,12 +13,24 @@ namespace Assets.Scripts
     internal class DashRgBd2 : MonoBehaviour, IDash
     {
         [SerializeField] private Rigidbody2D characterRbd2;
+        [SerializeField] private bool isDashing;
 
         public void Dash(Vector3 direction, float dashVelocity, float duration)
         {
-
-            characterRbd2.linearVelocity = direction.normalized * dashVelocity;    
+            if (!isDashing)
+            {
+                isDashing = true;
+                characterRbd2.linearVelocity = direction.normalized * dashVelocity;
+                StopSpecialAttack(duration);
+            }
         }
+
+        private IEnumerator StopSpecialAttack(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            isDashing = false;
+        }
+
 
         private void Awake()
         {
